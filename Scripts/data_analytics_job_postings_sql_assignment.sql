@@ -62,28 +62,12 @@ WHERE skill LIKE '%SQL%'
 AND days_since_posting > 21 
 AND domain IS NOT NULL
 
-SELECT domain												B-b	--Which three industries are in the top 4 on this list?
-	FROM data_analyst_jobs										--answer: Internet and Software, Banks and Financial Services, and Consulting and Business Services
-		WHERE skill LIKE '%SQL%' 								
-			AND days_since_posting > 21 						 
+SELECT domain, COUNT(domain) AS counts						B-b	--Which three industries are in the top 4 on this list?
+	FROM data_analyst_jobs										--answer: Internet and Software (62), Banks and Financial Services (61), and Consulting and Business Services (57), Health Care (52)
+		WHERE skill LIKE '%SQL%' 							B-c --How many jobs have been listed for more than 3 weeks for each of the top 4?
+			AND days_since_posting > 21 						--answer: 232
 			AND domain IS NOT NULL
 GROUP BY domain
-ORDER BY COUNT(domain) DESC;
-
-SELECT COUNT(domain)										B-c	--How many jobs have been listed for more than 3 weeks for each of the top 4?
-FROM data_analyst_jobs											--answer: 387
-WHERE skill LIKE '%SQL%' 
-AND days_since_posting > 21 
-AND domain IS NOT NULL
-AND domain = 'Internet and Software' 
-OR domain = 'Banks and Financial Services' 
-OR domain = 'Consulting and Business Services';
+ORDER BY counts DESC;
 
 */
-
-
-
-
-
-
-
